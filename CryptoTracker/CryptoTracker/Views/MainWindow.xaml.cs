@@ -1,27 +1,52 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
+﻿using System.Windows;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using CryptoTracker.Services;
 
 namespace CryptoTracker.Views
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
+        private bool _isDarkTheme = true;
+
         public MainWindow()
         {
             InitializeComponent();
+
+            // Register the Frame with NavigationService so it can control navigation
+            ServiceLocator.NavigationService.SetFrame(MainFrame);
+
+            // Navigate to the home page on startup
+            ServiceLocator.NavigationService.NavigateTo<CoinsListPage>();
+        }
+
+        private void HomeButton_Click(object sender, RoutedEventArgs e)
+        {
+            ServiceLocator.NavigationService.NavigateTo<CoinsListPage>();
+        }
+
+        private void SearchButton_Click(object sender, RoutedEventArgs e)
+        {
+            ExecuteSearch();
+        }
+
+        private void SearchBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+                ExecuteSearch();
+        }
+
+        private void ExecuteSearch()
+        {
+            var query = SearchBox.Text.Trim();
+            if (!string.IsNullOrEmpty(query))
+                ServiceLocator.NavigationService.NavigateTo<SearchPage>(query);
+        }
+
+        private void ThemeToggleButton_Click(object sender, RoutedEventArgs e)
+        {
+            _isDarkTheme = !_isDarkTheme;
+            ThemeManager.ApplyTheme(_isDarkTheme ? "Dark" : "Light");
+            ThemeToggleButton.Content = _isDarkTheme ? "🌙" : "☀️";
         }
     }
 }

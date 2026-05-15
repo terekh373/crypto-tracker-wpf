@@ -16,8 +16,6 @@
 
   <ItemGroup>
     <Folder Include="Converters\" />
-    <Folder Include="Themes\" />
-    <Folder Include="Views\" />
     <Folder Include="ViewModels\" />
   </ItemGroup>
 
