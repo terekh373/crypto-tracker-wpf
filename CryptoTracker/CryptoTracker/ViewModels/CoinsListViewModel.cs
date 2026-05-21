@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using CryptoTracker.Models;
 using CryptoTracker.Services;
+using CryptoTracker.Views;
 using System.Collections.ObjectModel;
 
 namespace CryptoTracker.ViewModels
