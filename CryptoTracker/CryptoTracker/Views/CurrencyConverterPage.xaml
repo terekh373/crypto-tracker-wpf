@@ -102,7 +102,7 @@
                               ItemsSource="{Binding AvailableCoins}"
                               SelectedItem="{Binding SelectedFromCoin}"
                               Background="{DynamicResource InputBackgroundBrush}"
-                              Foreground="{DynamicResource TextPrimaryBrush}"
+                              Foreground="{DynamicResource AccentBrush}"
                               BorderBrush="{DynamicResource BorderBrush}"
                               FontSize="14" FontWeight="SemiBold"
                               Padding="12,10"/>
@@ -130,7 +130,7 @@
                 <ComboBox ItemsSource="{Binding AvailableCoins}"
                           SelectedItem="{Binding SelectedToCoin}"
                           Background="{DynamicResource InputBackgroundBrush}"
-                          Foreground="{DynamicResource TextPrimaryBrush}"
+                          Foreground="{DynamicResource AccentBrush}"
                           BorderBrush="{DynamicResource BorderBrush}"
                           FontSize="14" FontWeight="SemiBold"
                           Padding="12,10"
