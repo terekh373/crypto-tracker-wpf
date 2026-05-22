@@ -1,0 +1,173 @@
+﻿<Page x:Class="CryptoTracker.Views.CurrencyConverterPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:converters="clr-namespace:CryptoTracker.Converters"
+      Background="{DynamicResource BackgroundBrush}"
+      Title="Currency Converter">
+
+    <Page.Resources>
+        <converters:BoolToVisibilityConverter x:Key="BoolToVisibility"/>
+    </Page.Resources>
+
+    <Grid Margin="30,20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <Grid Grid.Row="0" Margin="0,0,0,25">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Column="0"
+                    Content="← Back"
+                    Command="{Binding GoBackCommand}"
+                    Background="Transparent" BorderThickness="0"
+                    Foreground="{DynamicResource AccentBrush}"
+                    FontSize="14" Cursor="Hand"
+                    Margin="0,0,20,0"/>
+
+            <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                <TextBlock Text="Crypto Converter"
+                           FontSize="24" FontWeight="Bold"
+                           Foreground="{DynamicResource TextPrimaryBrush}"/>
+                <TextBlock Text="Convert between top cryptocurrencies"
+                           FontSize="13"
+                           Foreground="{DynamicResource TextSecondaryBrush}"
+                           Margin="0,4,0,0"/>
+            </StackPanel>
+        </Grid>
+
+        <!-- Loading -->
+        <TextBlock Grid.Row="1"
+                   Text="Loading prices..."
+                   FontSize="15"
+                   Foreground="{DynamicResource TextSecondaryBrush}"
+                   Margin="0,10"
+                   Visibility="{Binding IsLoading, Converter={StaticResource BoolToVisibility}}"/>
+
+        <!-- Error -->
+        <Border Grid.Row="1"
+                Background="#33EF4444" BorderBrush="#FFEF4444"
+                BorderThickness="1" CornerRadius="6" Padding="15,10" Margin="0,0,0,15"
+                Visibility="{Binding HasError, Converter={StaticResource BoolToVisibility}}">
+            <TextBlock Text="{Binding ErrorMessage}" Foreground="#FFEF4444" FontSize="13"/>
+        </Border>
+
+        <!-- Converter card -->
+        <Border Grid.Row="2"
+                Background="{DynamicResource SurfaceBrush}"
+                BorderBrush="{DynamicResource BorderBrush}"
+                BorderThickness="1" CornerRadius="12"
+                Padding="35,30"
+                MaxWidth="520"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Visibility="{Binding IsLoading, Converter={StaticResource BoolToVisibility}, ConverterParameter=Inverse}">
+            <StackPanel>
+
+                <!-- FROM section -->
+                <TextBlock Text="FROM"
+                           FontSize="11" FontWeight="SemiBold"
+                           Foreground="{DynamicResource TextSecondaryBrush}"
+                           Margin="0,0,0,8"/>
+
+                <Grid Margin="0,0,0,20">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="15"/>
+                        <ColumnDefinition Width="160"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Amount input -->
+                    <Border Grid.Column="0"
+                            Background="{DynamicResource InputBackgroundBrush}"
+                            BorderBrush="{DynamicResource BorderBrush}"
+                            BorderThickness="1" CornerRadius="8">
+                        <TextBox Text="{Binding AmountInput, UpdateSourceTrigger=PropertyChanged}"
+                                 BorderThickness="0"
+                                 Background="Transparent"
+                                 Foreground="{DynamicResource TextPrimaryBrush}"
+                                 FontSize="18" FontWeight="SemiBold"
+                                 VerticalContentAlignment="Center"
+                                 Padding="14,12"/>
+                    </Border>
+
+                    <!-- From coin selector -->
+                    <ComboBox Grid.Column="2"
+                              ItemsSource="{Binding AvailableCoins}"
+                              SelectedItem="{Binding SelectedFromCoin}"
+                              Background="{DynamicResource InputBackgroundBrush}"
+                              Foreground="{DynamicResource TextPrimaryBrush}"
+                              BorderBrush="{DynamicResource BorderBrush}"
+                              FontSize="14" FontWeight="SemiBold"
+                              Padding="12,10"/>
+                </Grid>
+
+                <!-- Swap button -->
+                <Button Content="⇅  Swap"
+                        Command="{Binding SwapCoinsCommand}"
+                        HorizontalAlignment="Center"
+                        Background="{DynamicResource SurfaceVariantBrush}"
+                        Foreground="{DynamicResource TextPrimaryBrush}"
+                        BorderThickness="0"
+                        FontSize="14"
+                        Padding="20,8"
+                        Cursor="Hand"
+                        Margin="0,0,0,20"/>
+
+                <!-- TO section -->
+                <TextBlock Text="TO"
+                           FontSize="11" FontWeight="SemiBold"
+                           Foreground="{DynamicResource TextSecondaryBrush}"
+                           Margin="0,0,0,8"/>
+
+                <!-- To coin selector -->
+                <ComboBox ItemsSource="{Binding AvailableCoins}"
+                          SelectedItem="{Binding SelectedToCoin}"
+                          Background="{DynamicResource InputBackgroundBrush}"
+                          Foreground="{DynamicResource TextPrimaryBrush}"
+                          BorderBrush="{DynamicResource BorderBrush}"
+                          FontSize="14" FontWeight="SemiBold"
+                          Padding="12,10"
+                          Margin="0,0,0,25"/>
+
+                <!-- Convert button -->
+                <Button Content="Convert"
+                        Command="{Binding ConvertCommand}"
+                        Background="{DynamicResource AccentBrush}"
+                        Foreground="White"
+                        BorderThickness="0"
+                        FontSize="15" FontWeight="SemiBold"
+                        Padding="0,12"
+                        Cursor="Hand"
+                        Margin="0,0,0,25"/>
+
+                <!-- Result -->
+                <Border Background="{DynamicResource SurfaceVariantBrush}"
+                        CornerRadius="10" Padding="20,16"
+                        Margin="0,0,0,12">
+                    <StackPanel>
+                        <TextBlock Text="Result"
+                                   FontSize="12"
+                                   Foreground="{DynamicResource TextSecondaryBrush}"
+                                   Margin="0,0,0,6"/>
+                        <TextBlock Text="{Binding ConvertedResult}"
+                                   FontSize="26" FontWeight="Bold"
+                                   Foreground="{DynamicResource AccentBrush}"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- Rate info -->
+                <TextBlock Text="{Binding RateInfo}"
+                           FontSize="13"
+                           Foreground="{DynamicResource TextSecondaryBrush}"
+                           HorizontalAlignment="Center"/>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Page>

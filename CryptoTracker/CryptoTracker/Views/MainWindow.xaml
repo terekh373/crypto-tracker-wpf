@@ -21,6 +21,7 @@
             <Grid Margin="20,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
@@ -36,8 +37,19 @@
                         Cursor="Hand"
                         Click="HomeButton_Click"/>
 
+                <!-- Converter nav button -->
+                <Button Grid.Column="1"
+                        Content="⇄ Converter"
+                        FontSize="13"
+                        Foreground="{DynamicResource TextSecondaryBrush}"
+                        Background="Transparent"
+                        BorderThickness="0"
+                        Cursor="Hand"
+                        Margin="15,0,0,0"
+                        Click="ConverterButton_Click"/>
+
                 <!-- Search box -->
-                <Border Grid.Column="2"
+                <Border Grid.Column="3"
                         Background="{DynamicResource InputBackgroundBrush}"
                         BorderBrush="{DynamicResource BorderBrush}"
                         BorderThickness="1"
@@ -70,7 +82,7 @@
 
                 <!-- Theme toggle button -->
                 <Button x:Name="ThemeToggleButton"
-                        Grid.Column="3"
+                        Grid.Column="4"
                         Content="🌙"
                         FontSize="18"
                         Background="Transparent"

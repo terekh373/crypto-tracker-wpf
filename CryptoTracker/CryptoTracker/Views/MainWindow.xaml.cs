@@ -11,17 +11,18 @@ namespace CryptoTracker.Views
         public MainWindow()
         {
             InitializeComponent();
-
-            // Register the Frame with NavigationService so it can control navigation
             ServiceLocator.NavigationService.SetFrame(MainFrame);
-
-            // Navigate to the home page on startup
             ServiceLocator.NavigationService.NavigateTo<CoinsListPage>();
         }
 
         private void HomeButton_Click(object sender, RoutedEventArgs e)
         {
             ServiceLocator.NavigationService.NavigateTo<CoinsListPage>();
+        }
+
+        private void ConverterButton_Click(object sender, RoutedEventArgs e)
+        {
+            ServiceLocator.NavigationService.NavigateTo<CurrencyConverterPage>();
         }
 
         private void SearchButton_Click(object sender, RoutedEventArgs e)
