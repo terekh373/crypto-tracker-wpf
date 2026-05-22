@@ -145,32 +145,82 @@
                         <!-- Chart header + period buttons -->
                         <Grid Margin="0,0,0,15">
                             <TextBlock Text="Price Chart"
-                                       FontSize="16" FontWeight="SemiBold"
-                                       Foreground="{DynamicResource TextPrimaryBrush}"
-                                       VerticalAlignment="Center"/>
+               FontSize="16" FontWeight="SemiBold"
+               Foreground="{DynamicResource TextPrimaryBrush}"
+               VerticalAlignment="Center"/>
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                                <Button Content="1D" Margin="4,0"
-                                        Command="{Binding ChangePeriodCommand}" CommandParameter="1"
-                                        Background="{DynamicResource SurfaceVariantBrush}"
-                                        Foreground="{DynamicResource TextPrimaryBrush}"
-                                        BorderThickness="0" Padding="10,5" Cursor="Hand"/>
-                                <Button Content="7D" Margin="4,0"
-                                        Command="{Binding ChangePeriodCommand}" CommandParameter="7"
-                                        Background="{DynamicResource AccentBrush}"
-                                        Foreground="White"
-                                        BorderThickness="0" Padding="10,5" Cursor="Hand"/>
-                                <Button Content="30D" Margin="4,0"
-                                        Command="{Binding ChangePeriodCommand}" CommandParameter="30"
-                                        Background="{DynamicResource SurfaceVariantBrush}"
-                                        Foreground="{DynamicResource TextPrimaryBrush}"
-                                        BorderThickness="0" Padding="10,5" Cursor="Hand"/>
-                                <Button Content="1Y" Margin="4,0"
-                                        Command="{Binding ChangePeriodCommand}" CommandParameter="365"
-                                        Background="{DynamicResource SurfaceVariantBrush}"
-                                        Foreground="{DynamicResource TextPrimaryBrush}"
-                                        BorderThickness="0" Padding="10,5" Cursor="Hand"/>
+
+                                <Button Content="1D" Margin="4,0" Padding="10,5" Cursor="Hand"
+                Command="{Binding ChangePeriodCommand}" CommandParameter="1"
+                BorderThickness="0">
+                                    <Button.Style>
+                                        <Style TargetType="Button">
+                                            <Setter Property="Background" Value="{DynamicResource SurfaceVariantBrush}"/>
+                                            <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}"/>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding SelectedDays}" Value="1">
+                                                    <Setter Property="Background" Value="{DynamicResource AccentBrush}"/>
+                                                    <Setter Property="Foreground" Value="White"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Style>
+                                </Button>
+
+                                <Button Content="7D" Margin="4,0" Padding="10,5" Cursor="Hand"
+                Command="{Binding ChangePeriodCommand}" CommandParameter="7"
+                BorderThickness="0">
+                                    <Button.Style>
+                                        <Style TargetType="Button">
+                                            <Setter Property="Background" Value="{DynamicResource SurfaceVariantBrush}"/>
+                                            <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}"/>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding SelectedDays}" Value="7">
+                                                    <Setter Property="Background" Value="{DynamicResource AccentBrush}"/>
+                                                    <Setter Property="Foreground" Value="White"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Style>
+                                </Button>
+
+                                <Button Content="30D" Margin="4,0" Padding="10,5" Cursor="Hand"
+                Command="{Binding ChangePeriodCommand}" CommandParameter="30"
+                BorderThickness="0">
+                                    <Button.Style>
+                                        <Style TargetType="Button">
+                                            <Setter Property="Background" Value="{DynamicResource SurfaceVariantBrush}"/>
+                                            <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}"/>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding SelectedDays}" Value="30">
+                                                    <Setter Property="Background" Value="{DynamicResource AccentBrush}"/>
+                                                    <Setter Property="Foreground" Value="White"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Style>
+                                </Button>
+
+                                <Button Content="1Y" Margin="4,0" Padding="10,5" Cursor="Hand"
+                Command="{Binding ChangePeriodCommand}" CommandParameter="365"
+                BorderThickness="0">
+                                    <Button.Style>
+                                        <Style TargetType="Button">
+                                            <Setter Property="Background" Value="{DynamicResource SurfaceVariantBrush}"/>
+                                            <Setter Property="Foreground" Value="{DynamicResource TextPrimaryBrush}"/>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding SelectedDays}" Value="365">
+                                                    <Setter Property="Background" Value="{DynamicResource AccentBrush}"/>
+                                                    <Setter Property="Foreground" Value="White"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Style>
+                                </Button>
+
                             </StackPanel>
                         </Grid>
+
 
                         <!-- LiveCharts chart -->
                         <lvc:CartesianChart
