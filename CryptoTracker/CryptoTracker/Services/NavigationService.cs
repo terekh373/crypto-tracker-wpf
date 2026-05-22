@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using System;
+using System.Windows.Controls;
 
 namespace CryptoTracker.Services
 {
@@ -15,7 +16,18 @@ namespace CryptoTracker.Services
         {
             if (_frame == null) throw new InvalidOperationException("Frame is not set. Call SetFrame first.");
 
-            var page = Activator.CreateInstance(typeof(TPage), parameter) as Page ?? Activator.CreateInstance(typeof(TPage)) as Page;
+            Page? page = null;
+
+            if (parameter != null)
+            {
+                try
+                {
+                    page = Activator.CreateInstance(typeof(TPage), parameter) as Page;
+                }
+                catch (MissingMethodException) { }
+            }
+
+            page ??= Activator.CreateInstance(typeof(TPage)) as Page;
 
             if (page != null) _frame.Navigate(page);
         }
